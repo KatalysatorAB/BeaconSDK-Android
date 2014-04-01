@@ -1,0 +1,67 @@
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in /Applications/Android Studio.app/sdk/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+-keepattributes EnclosingMethod
+
+-keep class sun.misc.Unsafe { *; }
+
+-keep class com.google.gson.examples.android.model.** { *; }
+
+-keep class com.katalysator.sdk.KATAdvertType
+{
+    public <methods>;
+}
+-keep class com.katalysator.sdk.KATAssets
+{
+    public <methods>;
+}
+-keep class com.katalysator.sdk.KATBeaconAdvert
+{
+    public <methods>;
+}
+-keep class com.katalysator.sdk.KATConfiguration
+{
+    public <methods>;
+}
+-keep class com.katalysator.sdk.KATEndPoints
+{
+    public <methods>;
+}
+-keep class com.katalysator.sdk.KATRequestBeaconAdvertPayload {
+                                                                  public <methods>;
+                                                              }
+-keep class com.katalysator.sdk.KATAdvertImageActivity {
+                                                           public <methods>;
+                                                       }
+-keep class com.katalysator.sdk.KATBeaconManager {
+    public <methods>;
+}
+
+-keep class com.katalysator.sdk.* {
+	public <methods>;
+}
+-keep public class * extends android.app.
+-keep public class * extends android.app.Activity
+-keepclasseswithmembers class * {
+    void onClick*(...);
+}
+-keepclasseswithmembers class * {
+    *** *Callback(...);
+}
+
+-keep public class * extends android.app.Service
