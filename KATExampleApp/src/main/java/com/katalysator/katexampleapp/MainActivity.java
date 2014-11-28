@@ -9,96 +9,130 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
-import com.katalysator.sdk.KATAdvertImageActivity;
-import com.katalysator.sdk.KATAssets;
-import com.katalysator.sdk.KATBeaconEvent;
-import com.katalysator.sdk.KATBeaconManager;
 
-public class MainActivity extends Activity implements KATBeaconEvent {
+import com.katalysator.sdk.advertisement.KATAdvertisement;
+import com.katalysator.sdk.engine.KATActionType;
+import com.katalysator.sdk.engine.KATAdvertImageActivity;
+import com.katalysator.sdk.engine.KATAssets;
+import com.katalysator.sdk.engine.KATEvent;
+import com.katalysator.sdk.engine.KATManager;
 
-	KATBeaconManager mKatBeaconManager;
-	TextView range;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-	private static final String sBeaconToken = "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA";
-	private static final String sApiToken = "BB6AED33-6E33-2685-D759-F989C0ED1C11";
+public class MainActivity extends Activity implements KATEvent {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		range = (TextView) findViewById(R.id.rangeTextView);
-	}
+    KATManager mKatManager;
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mKatBeaconManager = KATBeaconManager.getInstance(this);
-		mKatBeaconManager.bindBeacons(sBeaconToken, sApiToken, this);
-	}
+    TextView range;
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mKatBeaconManager.unBindBeacons();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        range = (TextView) findViewById(R.id.rangeTextView);
+    }
 
-	/**
-	 * Range from the beacon in meters
-	 *
-	 * @param rangeInMeter
-	 */
-	@Override
-	public void rangeInMeters(double rangeInMeter) {
-		range.setText(String.valueOf(rangeInMeter));
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-	/**
-	 * If data is specfied to return, it will return here
-	 * @param assets
-	 */
-	@Override
-	public void dataFromBeaconsReceived(KATAssets assets) {
+        // init the manager
+        mKatManager = KATManager.getInstance(this, "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA", this);
 
-	}
+        // To target just one single beacon id
+        // mKatManager.setBeaconToken("AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA");
 
-	/**
-	 * Notifications event will com through here,
-	 * this can happen both in background and foreground
-	 *
-	 * @param assets
-	 * @param fullscreenActivity
-	 */
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	@Override
-	public void notificationShouldDisplay(KATAssets assets, Class fullscreenActivity) {
-		Intent intent = KATAdvertImageActivity.getIntentWithParameters(MainActivity.this, assets);
+        // start monitoring for geofences and beacon ids configured on dashboard
+        mKatManager.startMonitoring(this);
 
-		PendingIntent pIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-		Notification n = new Notification.Builder(MainActivity.this).
-				setSmallIcon(R.drawable.ic_launcher).
-				setContentTitle("Application Name").
-				setContentIntent(pIntent).
-				setContentText(assets.getTitle()).
-				setAutoCancel(false).
-				build();
+        // load dictionary for ad information
+        mKatManager.loadAd();
 
-		NotificationManager notificationManager = (NotificationManager)
-				MainActivity.this.getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(0, n);
-	}
+        // load tags for the current device
+        mKatManager.audienceTags();
 
-	/**
-	 * If a fullscreen image is supposed to show this event will trigger.
-	 * The class fullscreenImageActivity is part of the sdk, but you could easily roll your own.
-	 * KATAssets is fully Serializable.
-	 *
-	 * @param fullscreenImageActivity
-	 * @param assets
-	 */
-	@Override
-	public void fullScreenImageShouldDisplay(Class fullscreenImageActivity, KATAssets assets) {
-		Intent intent = KATAdvertImageActivity.getIntentWithParameters(MainActivity.this, assets);
-		MainActivity.this.startActivity(intent);
-	}
+        // get to know the device better over time
+        mKatManager.conclude();
+
+        // option to add aditional information about a device
+        HashMap keyValue = new HashMap();
+        keyValue.put("username", "team@glimr.io");
+        mKatManager.enrichProfile(keyValue);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mKatManager.stopMonitoring();
+    }
+
+    /**
+     * Range from the beacon in meters
+     */
+    @Override
+    public void rangeInMeters(double rangeInMeter) {
+        range.setText(String.valueOf(rangeInMeter));
+    }
+
+    /**
+     * If data is specfied to return, it will return here
+     */
+    @Override
+    public void dataFromBeaconsReceived(KATAssets assets) {
+        mKatManager.trackAction(KATActionType.KATActionTypeEnter);
+        Log.i("Asset Data", assets.toString());
+    }
+
+    /**
+     * Notifications event will com through here,
+     * this can happen both in background and foreground
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void notificationShouldDisplay(KATAssets assets, Class fullscreenActivity) {
+        Intent intent;
+        if (fullscreenActivity != null) {
+            intent = KATAdvertImageActivity.getIntentWithParameters(MainActivity.this, assets);
+        } else {
+            intent = this.getIntent();
+        }
+
+        PendingIntent pIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+        Notification n = new Notification.Builder(MainActivity.this).
+                setSmallIcon(R.drawable.ic_launcher).
+                setContentTitle("Application Name").
+                setContentIntent(pIntent).
+                setContentText(assets.getTitle()).
+                setAutoCancel(false).
+                build();
+
+        NotificationManager notificationManager = (NotificationManager)
+                MainActivity.this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, n);
+    }
+
+    /**
+     * If a fullscreen image is supposed to show this event will trigger.
+     * The class fullscreenImageActivity is part of the sdk, but you could easily roll your own.
+     * KATAssets is fully Serializable.
+     */
+    @Override
+    public void fullScreenImageShouldDisplay(Class fullscreenImageActivity, KATAssets assets) {
+        Intent intent = KATAdvertImageActivity.getIntentWithParameters(MainActivity.this, assets);
+        MainActivity.this.startActivity(intent);
+    }
+
+    @Override
+    public void advertisementUpdated(KATAdvertisement advertisement) {
+        Log.i("advertisement", advertisement.toString());
+        mKatManager.adAction(advertisement);
+    }
+
+    @Override
+    public void availableAudienceTagsReceived(ArrayList<String> usertags) {
+        Log.i("usertags", usertags.toString());
+    }
 }

@@ -7,6 +7,10 @@
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 	<uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -19,30 +23,38 @@
             android:name="com.katalysator.katexampleapp.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
+                <action android:name="com.katalysator.sdk.START_FROM_NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-		<activity android:name="com.katalysator.sdk.KATAdvertImageActivity">
-		</activity>
+        <activity android:name="com.katalysator.sdk.engine.KATAdvertImageActivity">
+        </activity>
 
-		<service android:enabled="true"
-				 android:isolatedProcess="false"
-				 android:label="iBeacon"
-				 android:name="com.katalysator.sdk.service.IBeaconService">
-		</service>
+        <service android:enabled="true"
+                 android:isolatedProcess="false"
+                 android:label="iBeacon"
+                 android:name="com.katalysator.sdk.beacon.service.IBeaconService">
+        </service>
 
-		<service android:enabled="true"
-				 android:name="com.katalysator.sdk.IBeaconIntentProcessor">
-			<meta-data android:name="background" android:value="true" />
-			<intent-filter
-					android:priority="0" >
-				<action android:name="com.katalysator.sdk.DID_RANGING" />
-				<action android:name="com.katalysator.sdk.DID_MONITORING" />
-			</intent-filter>
-		</service>
+        <service android:enabled="true"
+                 android:name="com.katalysator.sdk.beacon.IBeaconIntentProcessor">
+            <meta-data android:name="background" android:value="true" />
+            <intent-filter
+                    android:priority="0" >
+                <action android:name="com.katalysator.sdk.DID_RANGING" />
+                <action android:name="com.katalysator.sdk.DID_MONITORING" />
+            </intent-filter>
+        </service>
+
+        <service android:enabled="true"
+                 android:name="com.katalysator.sdk.geofence.KATGeofenceIntentService"
+                 android:exported="true">
+        </service>
 
     </application>
 
