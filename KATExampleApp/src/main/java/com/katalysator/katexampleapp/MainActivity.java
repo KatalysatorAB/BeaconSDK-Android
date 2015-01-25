@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.katalysator.sdk.advertisement.KATAdvertisement;
 import com.katalysator.sdk.engine.KATActionType;
 import com.katalysator.sdk.engine.KATAdvertImageActivity;
 import com.katalysator.sdk.engine.KATAssets;
@@ -40,27 +39,18 @@ public class MainActivity extends Activity implements KATEvent {
         super.onResume();
 
         // init the manager
-        mKatManager = KATManager.getInstance(this, "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA", this);
-
-        // To target just one single beacon id
-        // mKatManager.setBeaconToken("AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA");
+        mKatManager = KATManager.getInstance(this, "API_TOKEN", this);
 
         // start monitoring for geofences and beacon ids configured on dashboard
         mKatManager.startMonitoring(this);
 
-        // load dictionary for ad information
-        mKatManager.loadAd();
-
         // load tags for the current device
-        mKatManager.audienceTags();
-
-        // get to know the device better over time
-        mKatManager.conclude();
+        mKatManager.getAudiences();
 
         // option to add aditional information about a device
         HashMap keyValue = new HashMap();
-        keyValue.put("username", "team@glimr.io");
-        mKatManager.enrichProfile(keyValue);
+        keyValue.put("username", "sven@glimr.io");
+        mKatManager.collect(keyValue);
     }
 
     @Override
@@ -71,20 +61,25 @@ public class MainActivity extends Activity implements KATEvent {
 
     /**
      * Range from the beacon in meters
+     *
+     * @param rangeInMeter
      */
     @Override
-    public void rangeInMeters(double rangeInMeter) {
+    public void beaconDistanceInMeters(double rangeInMeter) {
         range.setText(String.valueOf(rangeInMeter));
     }
 
     /**
      * If data is specfied to return, it will return here
+     *
+     * @param assets
      */
     @Override
-    public void dataFromBeaconsReceived(KATAssets assets) {
+    public void regionDataReceived(KATAssets assets) {
         mKatManager.trackAction(KATActionType.KATActionTypeEnter);
         Log.i("Asset Data", assets.toString());
     }
+
 
     /**
      * Notifications event will com through here,
@@ -126,13 +121,7 @@ public class MainActivity extends Activity implements KATEvent {
     }
 
     @Override
-    public void advertisementUpdated(KATAdvertisement advertisement) {
-        Log.i("advertisement", advertisement.toString());
-        mKatManager.adAction(advertisement);
-    }
-
-    @Override
-    public void availableAudienceTagsReceived(ArrayList<String> usertags) {
+    public void availableAudiencesUpdated(ArrayList<String> usertags) {
         Log.i("usertags", usertags.toString());
     }
 }
