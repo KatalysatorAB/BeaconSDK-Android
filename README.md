@@ -1,8 +1,10 @@
 Beacup-Android
 ==============
 
-This is the beta Katalysator Beacon SDK for Android
+Documentation
+============
 
+For documentation visit http://katalysatorab.github.io/
 
 Minimum setup steps
 ============
