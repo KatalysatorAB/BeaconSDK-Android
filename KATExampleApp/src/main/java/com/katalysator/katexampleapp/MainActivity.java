@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements KATEvent {
         mKatManager.startMonitoring(this);
 
         // load tags for the current device
-        mKatManager.getAudiences();
+        mKatManager.getAudiencesAndGeotags();
 
         // option to add aditional information about a device
         HashMap keyValue = new HashMap();
