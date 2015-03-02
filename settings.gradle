@@ -1,1 +1,1 @@
-include ':KATExampleApp', ':KatalysatorAndroidSDK'
+include ':KATExampleApp'

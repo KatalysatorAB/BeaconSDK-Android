@@ -59,15 +59,6 @@ public class MainActivity extends Activity implements KATEvent {
         mKatManager.stopMonitoring();
     }
 
-    /**
-     * Range from the beacon in meters
-     *
-     * @param rangeInMeter
-     */
-    @Override
-    public void beaconDistanceInMeters(double rangeInMeter) {
-        range.setText(String.valueOf(rangeInMeter));
-    }
 
     /**
      * If data is specfied to return, it will return here
