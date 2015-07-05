@@ -4,7 +4,7 @@ Beacup-Android
 Documentation
 ============
 
-For documentation visit http://katalysatorab.github.io/
+For documentation visit http://developer.glimr.io
 
 Minimum setup steps
 ============
