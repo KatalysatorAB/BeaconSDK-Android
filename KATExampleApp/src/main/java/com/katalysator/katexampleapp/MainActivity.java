@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements KATEvent {
         mKatManager = KATManager.getInstance(this, "B3945743-D258-49D0-AFBF-1E409AE59501", this);
 
         // start monitoring for geofences and beacon ids configured on dashboard
-        mKatManager.startMonitoring(this);
+        mKatManager.startMonitoring();
 
         // load tags for the current device
         mKatManager.getAudiencesAndGeotags();
