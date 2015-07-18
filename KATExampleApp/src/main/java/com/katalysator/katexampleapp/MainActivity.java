@@ -46,11 +46,6 @@ public class MainActivity extends Activity implements KATEvent {
 
         // load tags for the current device
         mKatManager.getAudiencesAndGeotags();
-
-        // option to add aditional information about a device
-        HashMap keyValue = new HashMap();
-        keyValue.put("username", "sven@glimr.io");
-        mKatManager.collect(keyValue);
     }
 
     @Override
