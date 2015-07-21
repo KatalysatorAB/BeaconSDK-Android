@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements KATEvent {
      * @param assets
      */
     @Override
-    public void regionDataReceived(KATAssets assets) {
+    public void regionDataReceived(KATAssets assets, boolean isDelayed) {
         mKatManager.trackAction(KATActionType.KATActionTypeEnter);
         Log.i("Asset Data", assets.toString());
     }
