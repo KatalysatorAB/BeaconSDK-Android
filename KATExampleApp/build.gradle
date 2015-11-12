@@ -22,7 +22,7 @@ android {
 
 dependencies {
     compile files('src/main/libs/katalysator_android_sdk.jar')
-    compile 'com.google.android.gms:play-services-ads:7.5.0'
-    compile 'com.google.android.gms:play-services-location:7.5.0'
+    compile 'com.google.android.gms:play-services-ads:8.+'
+    compile 'com.google.android.gms:play-services-location:8.+'
     compile 'com.google.code.gson:gson:2.2.+'
 }
