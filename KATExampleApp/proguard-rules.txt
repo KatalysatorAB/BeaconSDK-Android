@@ -22,22 +22,6 @@
 
 -keep class com.google.gson.examples.android.model.** { *; }
 
--keep class com.katalysator.sdk.KATAdvertType
-{
-    public <methods>;
-}
--keep class com.katalysator.sdk.KATAssets
-{
-    public <methods>;
-}
--keep class com.katalysator.sdk.KATBeaconAdvert
-{
-    public <methods>;
-}
--keep class com.katalysator.sdk.KATConfiguration
-{
-    public <methods>;
-}
 -keep class com.katalysator.sdk.KATEndPoints
 {
     public <methods>;
@@ -45,9 +29,7 @@
 -keep class com.katalysator.sdk.KATRequestBeaconAdvertPayload {
                                                                   public <methods>;
                                                               }
--keep class com.katalysator.sdk.KATAdvertImageActivity {
-                                                           public <methods>;
-                                                       }
+
 -keep class com.katalysator.sdk.KATBeaconManager {
     public <methods>;
 }
