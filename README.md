@@ -62,7 +62,6 @@ The SDK requires these permissions:
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 At this moment the SDK depends on the gson library, which you can add as a maven 
 dependency in gradle (as in the example project) or download the jar and add it as a dependency 
