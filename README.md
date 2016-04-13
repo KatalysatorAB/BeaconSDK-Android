@@ -67,10 +67,3 @@ At this moment the SDK depends on the gson library, which you can add as a maven
 dependency in gradle (as in the example project) or download the jar and add it as a dependency 
 in your own project.
 
-
-Also note the following lines might be needed depending on the use case as part of the tags for the main activity
-
-    <intent-filter>
-        <action android:name="com.katalysator.sdk.START_FROM_NOTIFICATION" />
-        <category android:name="android.intent.category.DEFAULT" />
-    </intent-filter>
