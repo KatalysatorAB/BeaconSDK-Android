@@ -49,11 +49,6 @@ If you want to integrate the SDK into your own app add the following lines:
     </service>
 		
 		
-If you want to use the built in full screen activity you also have to add:
-
-        <activity android:name="com.katalysator.sdk.engine.KATAdvertImageActivity"></activity>
-	
-	
 The SDK requires these permissions:
 	
   	<uses-permission android:name="android.permission.BLUETOOTH"/>
