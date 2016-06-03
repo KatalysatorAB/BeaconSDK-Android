@@ -9,6 +9,7 @@ import com.katalysator.sdk.engine.KATEvent;
 import com.katalysator.sdk.engine.KATManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends Activity implements KATEvent {
 
@@ -44,7 +45,11 @@ public class MainActivity extends Activity implements KATEvent {
     }
 
     @Override
-    public void availableAudiencesUpdated(ArrayList<String> usertags) {
-        Log.i("usertags", usertags.toString());
+    public void availableAudiencesUpdated(HashMap<String, ArrayList<String>> map) {
+        // raw response
+        Log.i("response", "availableAudiencesUpdated raw: " + map);
+
+        // helper method to create a url query string from the mapping
+        Log.i("response", "availableAudiencesUpdated query string: " + KATManager.map2QueryString(map));
     }
 }
