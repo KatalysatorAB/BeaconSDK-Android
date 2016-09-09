@@ -36,18 +36,13 @@ If you want to integrate the SDK into your own app add the following lines:
     <service android:enabled="true"
              android:name="com.katalysator.sdk.beacon.IBeaconIntentProcessor">
         <meta-data android:name="background" android:value="true" />
-        <intent-filter
-                android:priority="0" >
-            <action android:name="com.katalysator.sdk.DID_RANGING" />
-            <action android:name="com.katalysator.sdk.DID_MONITORING" />
-        </intent-filter>
     </service>
 
     <service android:enabled="true"
              android:name="com.katalysator.sdk.geofence.KATGeofenceIntentService"
              android:exported="true">
     </service>
-		
+	
 		
 The SDK requires these permissions:
 	
