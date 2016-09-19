@@ -32,22 +32,22 @@
                   android:exported="true"
                   android:isolatedProcess="false"
                   android:label="iBeacon"
-                  android:name="com.katalysator.sdk.beacon.service.KATBeaconReceiver">
+                  android:name="io.glimr.sdk.beacon.service.KATBeaconReceiver">
         </receiver>
 
         <service android:enabled="true"
                  android:isolatedProcess="false"
                  android:label="iBeacon"
-                 android:name="com.katalysator.sdk.beacon.service.IBeaconService">
+                 android:name="io.glimr.sdk.beacon.service.IBeaconService">
         </service>
 
         <service android:enabled="true"
-                 android:name="com.katalysator.sdk.beacon.IBeaconIntentProcessor">
+                 android:name="io.glimr.sdk.beacon.IBeaconIntentProcessor">
             <meta-data android:name="background" android:value="true" />
         </service>
 
         <service android:enabled="true"
-                 android:name="com.katalysator.sdk.geofence.KATGeofenceIntentService"
+                 android:name="io.glimr.sdk.geofence.KATGeofenceIntentService"
                  android:exported="true">
         </service>
 

@@ -9,9 +9,10 @@ For documentation visit http://developer.glimr.io
 Minimum setup steps
 ============
 
-The SDK is provided with the example app in 
+Add the Glimr SDK dependency in your build.gradle:
 
-	KATExampleApp/src/main/libs/katalysator_android_sdk.jar
+    compile 'io.glimr.sdk:glimr-geo:1.8.8'
+
 
 
 The example app is built with gradle and if you use a gradle compatible IDE the example app 
@@ -24,22 +25,22 @@ If you want to integrate the SDK into your own app add the following lines:
               android:exported="true"
               android:isolatedProcess="false"
               android:label="iBeacon"
-              android:name="com.katalysator.sdk.beacon.service.KATBeaconReceiver">
+              android:name="io.glimr.sdk.beacon.service.KATBeaconReceiver">
     </receiver>
 
     <service android:enabled="true"
              android:isolatedProcess="false"
              android:label="iBeacon"
-             android:name="com.katalysator.sdk.beacon.service.IBeaconService">
+             android:name="io.glimr.sdk.beacon.service.IBeaconService">
     </service>
 
     <service android:enabled="true"
-             android:name="com.katalysator.sdk.beacon.IBeaconIntentProcessor">
+             android:name="io.glimr.sdk.beacon.IBeaconIntentProcessor">
         <meta-data android:name="background" android:value="true" />
     </service>
 
     <service android:enabled="true"
-             android:name="com.katalysator.sdk.geofence.KATGeofenceIntentService"
+             android:name="io.glimr.sdk.geofence.KATGeofenceIntentService"
              android:exported="true">
     </service>
 	

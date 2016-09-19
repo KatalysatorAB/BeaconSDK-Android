@@ -22,19 +22,19 @@
 
 -keep class com.google.gson.examples.android.model.** { *; }
 
--keep class com.katalysator.sdk.KATEndPoints
+-keep class io.glimr.sdk.KATEndPoints
 {
     public <methods>;
 }
--keep class com.katalysator.sdk.KATRequestBeaconAdvertPayload {
+-keep class io.glimr.sdk.KATRequestBeaconAdvertPayload {
                                                                   public <methods>;
                                                               }
 
--keep class com.katalysator.sdk.KATBeaconManager {
+-keep class io.glimr.sdk.KATBeaconManager {
     public <methods>;
 }
 
--keep class com.katalysator.sdk.* {
+-keep class io.glimr.sdk.* {
 	public <methods>;
 }
 -keep public class * extends android.app.
