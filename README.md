@@ -33,13 +33,3 @@ The SDK requires these permissions:
 At this moment the SDK depends on the gson library, which you can add as a maven 
 dependency in gradle (as in the example project) or download the jar and add it as a dependency 
 in your own project.
-
-Changelog
-==========================
-
-### Version 1.9.0 - 30. September 2016
-
-* Skip reconnecting to GoogleApiClient if permissions are already satisfied
-* Update GPS fix using LocationServices.FusedLocationApi.getLastLocation when app comes to foreground
-* Use "socket.getClass().getMethod("setHostname", String.class).invoke(socket, host);" fallback for TLS connections for < Android 4.2
-
