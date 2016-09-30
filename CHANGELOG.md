@@ -9,3 +9,12 @@ _2016-09-30_
  *  FIX: Use "socket.getClass().getMethod("setHostname", String.class).invoke(socket, host);" fallback for TLS connections for < Android 4.2
  *  Skip reconnecting to GoogleApiClient if permissions are already satisfied
 
+## Version 1.9.1
+
+_2016-09-30_
+
+ *  Skip devices < 4.2 for when calling ```startMonitoring``` or ```getAudiencesAndGeotags```
+ *  Improved behaviour on some strictmodes disk read violations
+ *  Removed SSL pinning option
+ * 	Skip callback ```availableAudiencesUpdated``` of mapping is empty
+
