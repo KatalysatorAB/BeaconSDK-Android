@@ -18,3 +18,10 @@ _2016-09-30_
  *  Removed SSL pinning option
  * 	Skip callback ```availableAudiencesUpdated``` of mapping is empty
 
+## Version 1.9.2
+
+_2016-10-01_
+
+ *  FIX: ```startMonitoring``` or ```getAudiencesAndGeotags``` calls when GoogleApiClient connection slow
+ *  Improved behaviour on some strictmodes disk read violations
+

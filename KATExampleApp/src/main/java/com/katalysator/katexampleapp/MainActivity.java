@@ -25,7 +25,7 @@ public class MainActivity extends Activity implements KATEvent {
         super.onResume();
 
         // init the manager
-        mKatManager = KATManager.getInstance(this, "API_TOKEN", this, false, 30);
+        mKatManager = KATManager.getInstance(this, "API_TOKEN", this, 30);
 
         // start monitoring locations and ibeacons
         mKatManager.startMonitoring();
