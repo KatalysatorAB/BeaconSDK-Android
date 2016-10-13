@@ -1,13 +1,20 @@
 Changelog
 ==========================
 
-## Version 1.9.0
+## Version 1.9.3
 
-_2016-09-30_
+_2016-10-13_
 
- *  FIX: Update GPS fix using LocationServices.FusedLocationApi.getLastLocation when app comes to foreground
- *  FIX: Use "socket.getClass().getMethod("setHostname", String.class).invoke(socket, host);" fallback for TLS connections for < Android 4.2
- *  Skip reconnecting to GoogleApiClient if permissions are already satisfied
+ *  Added flag ```ipOnly``` in constructor in case the app implements a more complex permission layer
+ 
+
+## Version 1.9.2
+
+_2016-10-01_
+
+ *  FIX: ```startMonitoring``` or ```getAudiencesAndGeotags``` calls when GoogleApiClient connection slow
+ *  Improved behaviour on some strictmodes disk read violations
+
 
 ## Version 1.9.1
 
@@ -18,10 +25,11 @@ _2016-09-30_
  *  Removed SSL pinning option
  * 	Skip callback ```availableAudiencesUpdated``` of mapping is empty
 
-## Version 1.9.2
 
-_2016-10-01_
+## Version 1.9.0
 
- *  FIX: ```startMonitoring``` or ```getAudiencesAndGeotags``` calls when GoogleApiClient connection slow
- *  Improved behaviour on some strictmodes disk read violations
+_2016-09-30_
 
+ *  FIX: Update GPS fix using LocationServices.FusedLocationApi.getLastLocation when app comes to foreground
+ *  FIX: Use "socket.getClass().getMethod("setHostname", String.class).invoke(socket, host);" fallback for TLS connections for < Android 4.2
+ *  Skip reconnecting to GoogleApiClient if permissions are already satisfied
