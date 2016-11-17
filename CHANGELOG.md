@@ -1,6 +1,15 @@
 Changelog
 ==========================
 
+## Version 1.9.6
+
+_2016-11-16_
+
+ *  Breaking Change: KATManager is now a singleton, calling ```init()``` is required
+ *  Breaking Change: It is required to set the ```setAudiencesAndGeotagsCallback()``` callback, then get tags using ```KATManager.getInstance().getAudiencesAndGeotags()```
+ *  Added init param ```tagCacheExpireSeconds``` to set the caching time for tags
+
+
 ## Version 1.9.3
 
 _2016-10-13_

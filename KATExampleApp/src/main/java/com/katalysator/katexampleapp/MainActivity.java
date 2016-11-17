@@ -10,9 +10,7 @@ import io.glimr.sdk.engine.KATManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends Activity implements KATEvent {
-
-    KATManager mKatManager;
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,30 +23,33 @@ public class MainActivity extends Activity implements KATEvent {
         super.onResume();
 
         // init the manager
-        mKatManager = KATManager.getInstance(this, "API_TOKEN", this, 30);
+        KATManager manager = KATManager.getInstance();
+        manager.init(this.getApplicationContext(), "API_TOKEN", 30, false, 90);
 
         // start monitoring locations and ibeacons
-        mKatManager.startMonitoring();
+        KATManager.getInstance().startMonitoring();
 
         // load tags for the current device
-        mKatManager.getAudiencesAndGeotags();
+        KATManager.getInstance().setAudiencesAndGeotagsCallback(new KATEvent() {
+            @Override
+            public void availableAudiencesUpdated(HashMap<String, ArrayList<String>> usertags) {
+                // raw response
+                Log.i("response", "availableAudiencesUpdated raw: " + usertags);
+
+                // raw values
+                Log.i("response", "availableAudiencesUpdated list: " + KATManager.mapToArrayList(usertags));
+
+                // helper method to create a url query string from the mapping
+                Log.i("response", "availableAudiencesUpdated query string: " + KATManager.map2QueryString(usertags));
+            }
+        });
+        KATManager.getInstance().getAudiencesAndGeotags();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mKatManager.stopMonitoring();
+        KATManager.getInstance().stopMonitoring();
     }
 
-    @Override
-    public void availableAudiencesUpdated(HashMap<String, ArrayList<String>> map) {
-        // raw response
-        Log.i("response", "availableAudiencesUpdated raw: " + map);
-
-        // raw values
-        Log.i("response", "availableAudiencesUpdated list: " + KATManager.mapToArrayList(map));
-
-        // helper method to create a url query string from the mapping
-        Log.i("response", "availableAudiencesUpdated query string: " + KATManager.map2QueryString(map));
-    }
 }
