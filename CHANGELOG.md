@@ -1,6 +1,13 @@
 Changelog
 ==========================
 
+## Version 1.9.7
+
+_2016-11-17_
+
+ *  FIX: Fix or catch some null pointer and runtime exceptions, mostly BLE related
+
+
 ## Version 1.9.6
 
 _2016-11-16_
