@@ -1,6 +1,15 @@
 Changelog
 ==========================
 
+## Version 1.9.8
+
+_2016-12-19_
+
+ *  FIX: Issue that caused ```getAudiencesAndGeotags()``` not to initiate request if advertisting identifier null and location permission not given
+ * 	Added method to get local cached tags from storage
+ *	Added error callback that gets called on HTTP problems
+
+
 ## Version 1.9.7
 
 _2016-11-17_
