@@ -1,6 +1,13 @@
 Changelog
 ==========================
 
+## Version 1.9.9
+
+_2017-01-03_
+
+ *  FIX: Issue that caused a crash when scanning for beacons in background on very few devices running Android 6
+
+
 ## Version 1.9.8
 
 _2016-12-19_
