@@ -11,7 +11,7 @@ Minimum setup steps
 
 Add the Glimr SDK dependency in your build.gradle:
 
-    compile 'io.glimr.sdk:glimr-geo:1.8.8'
+    compile 'io.glimr.sdk:glimr-geo:2.0.0'
 
 Also, don't forget to add jcenter to your repositories:
 
@@ -24,8 +24,8 @@ Also, don't forget to add jcenter to your repositories:
 The SDK requires these permissions:
 	
   	<uses-permission android:name="android.permission.BLUETOOTH"/>
-	  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-	  <uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

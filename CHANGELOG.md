@@ -1,6 +1,13 @@
 Changelog
 ==========================
 
+## Version 2.0.0
+
+_2017-01-05_
+
+ *  FIX: Follow up fix for version 1.9.9 which still caused a crash on a single device running Android 6 in production environment
+
+
 ## Version 1.9.9
 
 _2017-01-03_
