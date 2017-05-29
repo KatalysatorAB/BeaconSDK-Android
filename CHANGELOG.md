@@ -1,6 +1,13 @@
 Changelog
 ==========================
 
+## Version 2.1.0
+
+_2017-05-29_
+
+ *  Breaking Change: Raised ```com.google.android.gms:play-services``` to ```10.2.+``` and ```minSdkVersion``` to ```14``` 
+
+
 ## Version 2.0.0
 
 _2017-01-05_

@@ -42,6 +42,11 @@ public class MainActivity extends Activity {
                 // helper method to create a url query string from the mapping
                 Log.i("response", "availableAudiencesUpdated query string: " + KATManager.map2QueryString(usertags));
             }
+
+            @Override
+            public void audienceUpdateError(int responseCode, String errorMessage) {
+
+            }
         });
         KATManager.getInstance().getAudiencesAndGeotags();
     }
