@@ -12,6 +12,8 @@ import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
+    private static final String GLIMR_TOKEN = "INSERT_YOUR_TOKEN";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +26,13 @@ public class MainActivity extends Activity {
 
         // init the manager
         KATManager manager = KATManager.getInstance();
-        manager.init(this.getApplicationContext(), "API_TOKEN", 30, false, 90);
+        manager.init(this.getApplicationContext(), GLIMR_TOKEN, 30, false, 90);
 
         // start monitoring locations and ibeacons
-        KATManager.getInstance().startMonitoring();
+        manager.startMonitoring();
 
         // load tags for the current device
-        KATManager.getInstance().setAudiencesAndGeotagsCallback(new KATEvent() {
+        manager.setAudiencesAndGeotagsCallback(new KATEvent() {
             @Override
             public void availableAudiencesUpdated(HashMap<String, ArrayList<String>> usertags) {
                 // raw response
@@ -48,13 +50,14 @@ public class MainActivity extends Activity {
 
             }
         });
-        KATManager.getInstance().getAudiencesAndGeotags();
+        manager.getAudiencesAndGeotags();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        KATManager.getInstance().setAudiencesAndGeotagsCallback(null);
-        KATManager.getInstance().stopMonitoring();
+        KATManager manager = KATManager.getInstance();
+        manager.setAudiencesAndGeotagsCallback(null);
+        manager.stopMonitoring();
     }
 }
